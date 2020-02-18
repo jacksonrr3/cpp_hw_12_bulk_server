@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.2)
 
 project(bulk_server VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
+set(CMAKE_CXX_STANDARD 14)
+
 find_package(Threads REQUIRED)
 find_package(Boost REQUIRED system )
 
@@ -18,8 +20,6 @@ set_target_properties(bulk_server PROPERTIES
     COMPILE_OPTIONS "-Wpedantic;-Wall;-Wextra;-fsanitize=address"
     LINK_FLAGS "-fsanitize=address"
 )
-
-set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static")
 
 install(TARGETS bulk_server RUNTIME DESTINATION bin)
 
