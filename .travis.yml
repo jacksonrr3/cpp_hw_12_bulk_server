@@ -4,9 +4,7 @@ compiler: clang
 addons:
   apt:
     packages: 
-
-install:
-- sudo apt-get install g++-6 libboost1.67-all-dev
+    - libboost-asio-dev
 
 script:
 - cmake .
