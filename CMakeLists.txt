@@ -5,7 +5,7 @@ project(bulk-server VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 find_package(Threads REQUIRED)
 find_package(Boost COMPONENTS system REQUIRED)
 
-add_executable(bulk-server src/main src/server.h)
+add_executable(bulk-server src/main.cpp src/async.cpp)
 
 set_target_properties(bulk-server PROPERTIES
     CXX_STANDARD 14
