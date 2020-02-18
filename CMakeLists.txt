@@ -10,17 +10,16 @@ LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
 
 add_executable(bulk-server src/main src/server.h)
 
-target_link_libraries(bulk_server ${CMAKE_THREAD_LIBS_INIT} ${Boost_SYSTEM_LIBRARY})
-
 set_target_properties(bulk-server PROPERTIES
-    CXX_STANDARD 17
+    CXX_STANDARD 14
     CXX_STANDARD_REQUIRED ON
     COMPILE_OPTIONS "-Wpedantic;-Wall;-Wextra;-fsanitize=thread"
     LINK_FLAGS "-fsanitize=thread"
+      INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
 )
 
 target_link_libraries(bulk-server
-    ${CMAKE_THREAD_LIBS_INIT}
+    ${Boost_LIBRARIES}
 )
 
 install(TARGETS bulk-server RUNTIME DESTINATION bin)
