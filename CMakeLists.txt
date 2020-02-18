@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.2)
 project(bulk-server VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
 find_package(Threads REQUIRED)
-find_package(Boost COMPONENTS system REQUIRED)
+find_package(Boost REQUIRED system )
 
 add_executable(bulk-server src/main.cpp src/async.cpp)
 
