@@ -15,8 +15,8 @@ target_link_libraries(bulk_server ${CMAKE_THREAD_LIBS_INIT} ${Boost_SYSTEM_LIBRA
 set_target_properties(bulk_server PROPERTIES
     CXX_STANDARD 17
     CXX_STANDARD_REQUIRED ON
-    COMPILE_OPTIONS "-Wpedantic;-Wall;-Wextra;-fsanitize=thread;-fsanitize=addres"
-    LINK_FLAGS "-fsanitize=thread"
+    COMPILE_OPTIONS "-Wpedantic;-Wall;-Wextra;-fsanitize=addres"
+    LINK_FLAGS "-fsanitize=addres"
 )
 
 set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static")
