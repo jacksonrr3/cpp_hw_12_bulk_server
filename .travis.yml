@@ -5,6 +5,9 @@ addons:
   apt:
     packages: 
 
+install:
+- sudo apt-get install g++-6 libboost1.67-all-dev
+
 script:
 - cmake .
 - cmake --build .
