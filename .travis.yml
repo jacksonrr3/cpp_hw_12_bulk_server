@@ -3,11 +3,9 @@ language: cpp
 compiler: clang
 addons:
   apt:
-    packages: 
+    packages:
+    - boost1.67
    
-install:
-  - sudo apt-get install libboost-system-dev -y
-
 script:
 - cmake .
 - cmake --build .
