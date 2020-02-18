@@ -8,7 +8,7 @@ find_package(Boost COMPONENTS system REQUIRED)
 add_executable(bulk-server src/main.cpp src/async.cpp)
 
 set_target_properties(bulk-server PROPERTIES
-    CXX_STANDARD 14
+    CXX_STANDARD 17
     CXX_STANDARD_REQUIRED ON
     COMPILE_OPTIONS "-Wpedantic;-Wall;-Wextra;-fsanitize=thread"
     LINK_FLAGS "-fsanitize=thread"
