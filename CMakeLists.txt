@@ -5,11 +5,6 @@ project(bulk-server VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 find_package(Threads REQUIRED)
 find_package(Boost COMPONENTS system REQUIRED)
 
-INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
-LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
-
-add_library(async SHARED src/async.cpp src/async.h)
-
 add_executable(bulk-server src/main src/server.h)
 
 set_target_properties(bulk-server PROPERTIES
@@ -17,21 +12,10 @@ set_target_properties(bulk-server PROPERTIES
     CXX_STANDARD_REQUIRED ON
     COMPILE_OPTIONS "-Wpedantic;-Wall;-Wextra;-fsanitize=thread"
     LINK_FLAGS "-fsanitize=thread"
-      INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
+    INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
 )
 
-set_target_properties(async PROPERTIES
-    CXX_STANDARD 17
-    CXX_STANDARD_REQUIRED ON
-    COMPILE_OPTIONS "-Wpedantic;-Wall;-Wextra;-fsanitize=thread"
-    LINK_FLAGS "-fsanitize=thread"
-)
-
-target_link_libraries(async ${CMAKE_THREAD_LIBS_INIT})
-
-target_link_libraries(bulk-server async ${Boost_LIBRARIES})
-
-install(TARGETS async LIBRARY DESTINATION lib)
+target_link_libraries(bulk-server ${Boost_LIBRARIES})
 
 install(TARGETS bulk-server RUNTIME DESTINATION bin)
 
