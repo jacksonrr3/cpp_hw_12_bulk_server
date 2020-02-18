@@ -3,8 +3,14 @@ cmake_minimum_required(VERSION 3.2)
 project(bulk-server VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
 find_package(Threads REQUIRED)
+find_package(Boost REQUIRED COMPONENTS system)
+
+INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
+LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
 
 add_executable(bulk-server src/main src/server.h)
+
+target_link_libraries(bulk_server ${CMAKE_THREAD_LIBS_INIT} ${Boost_SYSTEM_LIBRARY})
 
 set_target_properties(bulk-server PROPERTIES
     CXX_STANDARD 17
