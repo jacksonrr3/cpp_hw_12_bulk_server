@@ -4,6 +4,7 @@ compiler: clang
 addons:
   apt:
     packages:
+    - libboost-system-dev
 
 install:
   - sudo apt-get install libboost-system-dev -y
