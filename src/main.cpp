@@ -15,6 +15,7 @@ int main(int argc, char* argv[])
         ba::io_service io_service;
         server bulk_server(io_service, std::atoi(argv[1]), std::atoi(argv[2]));
         io_service.run();
+        
     }
     catch (std::exception & e)
     {
