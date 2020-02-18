@@ -3,6 +3,7 @@
 #include <set>
 #include <mutex>
 #include <boost/asio.hpp>
+#include <boost/bind.hpp>
 #include "async.h"
 /*
 namespace ba = boost::asio;
