@@ -3,12 +3,12 @@ compiler: gcc
 dist: xenial
 
 before_install:
-  # C++14
+  # C++17
   - echo "deb http://ru.archive.ubuntu.com/ubuntu/ cosmic main universe" | sudo tee -a /etc/apt/sources.list
   - sudo apt-get update
 
 install:
-  # C++14
+  # C++17
   - sudo apt-get install g++-6 libboost1.67-all-dev
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
 
