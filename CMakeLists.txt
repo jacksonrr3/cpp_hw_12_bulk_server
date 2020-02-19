@@ -1,11 +1,16 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.12)
 
 project(bulk_server VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
 
 find_package(Threads)
 find_package(Boost COMPONENTS system 
                               asio
                               REQUIRED)
+                              
+set(CMAKE_CXX_STANDARD 17)
 
 add_executable(bulk_server src/main.cpp src/server.h src/async.h src/async.cpp)
 
