@@ -75,10 +75,10 @@ private:
 class server
 {
 public:
-    server(ba::io_service& io_service, int port, std::size_t size)
-        : service_(io_service),
+    server(ba::io_service& io_service, const tcp::endpoint& endpoint, std::size_t size)
+     //   : service_(io_service),
     //    endpoint_(ba::ip::tcp::v4(), port),
-        acceptor_(io_service, ba::ip::tcp::endpoint(ba::ip::tcp::v4(), port)),
+        : acceptor_(io_service, endpoint),
         socket_(io_service), 
         bulk_size_(size)
     {
@@ -100,7 +100,7 @@ private:
             });
     }
 
-    ba::io_service& service_;
+ //   ba::io_service& service_;
  //   ba::ip::tcp::endpoint endpoint_;
     ba::ip::tcp::acceptor acceptor_;
     //ba::ip::tcp::endpoint endpoint_(ba::ip::tcp::v4(), std::atoi(argv[1]));
