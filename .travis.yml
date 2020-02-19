@@ -5,7 +5,7 @@ addons:
    update: true
    sources: [ 'ubuntu-toolchain-r-test' ]
    packages:
-           - libstdc++-6-dev
+           - libstdc++-7-dev
            - libboost-dev
            - libboost-system-dev
 compiler: clang
