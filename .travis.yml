@@ -11,6 +11,7 @@ install:
   - conan user
 
 script:
+- conan install .
 - cmake .
 - cmake --build .
 - cmake --build . --target package
