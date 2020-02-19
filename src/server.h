@@ -2,6 +2,7 @@
 #include <array>
 #include <set>
 #include <mutex>
+#include <iostream>
 #include <boost/asio.hpp>
 #include <boost/bind.hpp>
 #include "async.h"
