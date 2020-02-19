@@ -89,7 +89,7 @@ private:
     void do_accept()
     {
        acceptor_.async_accept(socket_,
-            [this, socket_](boost::system::error_code ec)
+            [this](boost::system::error_code ec)
             {
                 if (!ec)
                 {
