@@ -41,7 +41,7 @@ public:
         cl_.insert(shared_from_this());
         id_ = async::connect(bl_size_);
         buff_ = std::make_shared<std::array<char, buff_size>>();
-        std::cin << "start session, id = " << ((int)id_) << "\n";
+        std::cout << "start session, id = " << ((int)id_) << "\n";
         do_read();
     }
 
@@ -49,20 +49,20 @@ private:
     void do_read()
     {
         auto self(shared_from_this());
-        std::cin << "read session, id = " << ((int)id_) << "\n";
+        std::cout << "read session, id = " << ((int)id_) << "\n";
         ba::async_read(socket_,
             boost::asio::buffer(buff_->data(), buff_size),
             [this, self](boost::system::error_code ec, std::size_t length)
             {
                 if (!ec)
                 {
-                 std::cin << "receive, id = " << ((int)id_) << "\n";
+                 std::cout << "receive, id = " << ((int)id_) << "\n";
                     async::receive(id_, buff_->data(), length);
                     do_read();
                 }
                else
                 {
-                 std::cin << "disconnect, id = " << ((int)id_) << "\n";
+                 std::cout << "disconnect, id = " << ((int)id_) << "\n";
                     async::disconnect(id_);
                     cl_.erase(shared_from_this());
                 }
@@ -94,13 +94,13 @@ public:
 private:
     void do_accept()
     {
-        std::cin << "do_accept\n"
+        std::cout << "do_accept\n"
        acceptor_.async_accept(socket_,
             [this](boost::system::error_code ec)
             {
                 if (!ec)
                 {
-                    std::cin << "make shared session\n"
+                    std::cout << "make shared session\n"
                     std::make_shared<session>(std::move(socket_), clients_, bulk_size_)->start_session();
                 }
 
