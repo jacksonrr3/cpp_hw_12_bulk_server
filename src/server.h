@@ -87,20 +87,20 @@ public:
         socket_(io_service), 
         bulk_size_(size)
     {
-            std::cin << "конструктор сервера\n"
+            std::cin << "конструктор сервера\n";
         do_accept();
     }
 
 private:
     void do_accept()
     {
-        std::cout << "do_accept\n"
+        std::cout << "do_accept\n";
        acceptor_.async_accept(socket_,
             [this](boost::system::error_code ec)
             {
                 if (!ec)
                 {
-                    std::cout << "make shared session\n"
+                    std::cout << "make shared session\n";
                     std::make_shared<session>(std::move(socket_), clients_, bulk_size_)->start_session();
                 }
 
