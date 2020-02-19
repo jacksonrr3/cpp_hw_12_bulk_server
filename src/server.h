@@ -5,7 +5,7 @@
 #include <boost/asio.hpp>
 #include <boost/bind.hpp>
 #include "async.h"
-/*
+
 namespace ba = boost::asio;
 
 //boost::asio::io_service io_service;
@@ -23,7 +23,7 @@ public:
 */
 
 //typedef std::shared_ptr<session> participant_ptr;
-/*
+
 class session
    // : public participant,
     : public std::enable_shared_from_this<session>
@@ -108,8 +108,10 @@ private:
     //ba::ip::tcp::socket socket_;
     std::set<std::shared_ptr<session>> clients_;
     std::size_t bulk_size_;
-};*/
-    
+};
+
+
+  /*  
     boost::asio::io_service service;
 boost::asio::ip::tcp::acceptor acceptor(service);
 const size_t buffer_size = 1024;
@@ -149,4 +151,4 @@ void server(unsigned short port, size_t bulk) {
     acceptor.async_accept(*socket, boost::bind(on_accept, socket, bulk, _1));
     service.run();
 }
-
+*/
