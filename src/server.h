@@ -79,7 +79,7 @@ public:
         : service_(io_service),
     //    endpoint_(ba::ip::tcp::v4(), port),
         acceptor_(io_service, ba::ip::tcp::endpoint(ba::ip::tcp::v4(), port)),
-      //  socket_(io_service), 
+        socket_(io_service), 
         bulk_size_(size)
     {
         do_accept();
@@ -88,13 +88,12 @@ public:
 private:
     void do_accept()
     {
-       auto socket_ = std::make_shared<ba::ip::tcp::socket>(service_);
-        acceptor_.async_accept(*socket_,
+       acceptor_.async_accept(socket_,
             [this, socket_](boost::system::error_code ec)
             {
                 if (!ec)
                 {
-                    std::make_shared<session>(std::move(*socket_), clients_, bulk_size_)->start_session();
+                    std::make_shared<session>(std::move(socket_), clients_, bulk_size_)->start_session();
                 }
 
                 do_accept();
@@ -105,7 +104,7 @@ private:
  //   ba::ip::tcp::endpoint endpoint_;
     ba::ip::tcp::acceptor acceptor_;
     //ba::ip::tcp::endpoint endpoint_(ba::ip::tcp::v4(), std::atoi(argv[1]));
-    //ba::ip::tcp::socket socket_;
+    ba::ip::tcp::socket socket_;
     std::set<std::shared_ptr<session>> clients_;
     std::size_t bulk_size_;
 };
