@@ -41,7 +41,7 @@ public:
         cl_.insert(shared_from_this());
         id_ = async::connect(bl_size_);
         buff_ = std::make_shared<std::array<char, buff_size>>();
-        std::cout << "start session, id = " << ((int)id_) << "\n";
+        std::cout << "start session, id = " << (reinterpret_cast<std::size_t>(id_)) << "\n";
         do_read();
     }
 
@@ -49,20 +49,20 @@ private:
     void do_read()
     {
         auto self(shared_from_this());
-        std::cout << "read session, id = " << ((int)id_) << "\n";
+        std::cout << "read session, id = " << (reinterpret_cast<std::size_t>(id_)) << "\n";
         ba::async_read(socket_,
             boost::asio::buffer(buff_->data(), buff_size),
             [this, self](boost::system::error_code ec, std::size_t length)
             {
                 if (!ec)
                 {
-                 std::cout << "receive, id = " << ((int)id_) << "\n";
+                 std::cout << "receive, id = " << (reinterpret_cast<std::size_t>(id_)) << "\n";
                     async::receive(id_, buff_->data(), length);
                     do_read();
                 }
                else
                 {
-                 std::cout << "disconnect, id = " << ((int)id_) << "\n";
+                 std::cout << "disconnect, id = " << (reinterpret_cast<std::size_t>(id_)) << "\n";
                     async::disconnect(id_);
                     cl_.erase(shared_from_this());
                 }
@@ -87,7 +87,7 @@ public:
         socket_(io_service), 
         bulk_size_(size)
     {
-            std::cin << "конструктор сервера\n";
+            std::cout << "конструктор сервера\n";
         do_accept();
     }
 
