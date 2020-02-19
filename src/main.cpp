@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
         }
        
         ba::io_service io_service;
-        ba::ip::tcp::endpoint endpoint(tcp::v4(), std::atoi(argv[1]));
+        ba::ip::tcp::endpoint endpoint(ba::ip::tcp::v4(), std::atoi(argv[1]));
 
         server bulk_server(io_service, endpoint, std::atoi(argv[2]));
         io_service.run();
