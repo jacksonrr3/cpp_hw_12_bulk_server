@@ -75,7 +75,7 @@ private:
 class server
 {
 public:
-    server(ba::io_service& io_service, const tcp::endpoint& endpoint, std::size_t size)
+    server(ba::io_service& io_service, const ba::ip::tcp::endpoint& endpoint, std::size_t size)
      //   : service_(io_service),
     //    endpoint_(ba::ip::tcp::v4(), port),
         : acceptor_(io_service, endpoint),
