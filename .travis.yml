@@ -1,24 +1,18 @@
+os: linux
 dist: xenial
 language: cpp
+compiler: gcc
 addons:
- apt:
-   update: true
-   sources: [ 'ubuntu-toolchain-r-test' ]
-   packages:
-           - libstdc++-7-dev
-           - libboost-dev
-           - libboost-system-dev
-compiler: clang
-
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - libboost-all-dev
+    - g++-8
+env:
+  - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
 before_install:
-  # C++14
-  - echo "deb http://ru.archive.ubuntu.com/ubuntu/ cosmic main universe" | sudo tee -a /etc/apt/sources.list
-  - sudo apt-get update
-
-install:
-  # C++14
-  - sudo apt-get install g++-7 libboost1.67-all-dev
-  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 90
+  - eval "${MATRIX_EVAL}"
 
 script:
 - cmake .
