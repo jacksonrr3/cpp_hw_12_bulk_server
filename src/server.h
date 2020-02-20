@@ -32,7 +32,7 @@ public:
     {
     session_mutex.lock();
         cl_.insert(shared_from_this());
-    session_mutex.inlock();    
+    session_mutex.unlock();    
         id_ = async::connect(bl_size_);
         buff_ = std::make_shared<std::array<char, buff_size>>();
         do_read();
