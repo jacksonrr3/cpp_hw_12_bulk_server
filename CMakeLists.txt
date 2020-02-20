@@ -10,16 +10,7 @@ find_package(Boost COMPONENTS system REQUIRED)
                               
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(bulk_server src/main.cpp src/server.h)
-
-add_library(async SHARED src/async.cpp src/async.h)
-
-set_target_properties(async PROPERTIES
-    CXX_STANDARD 17
-    CXX_STANDARD_REQUIRED ON
-    COMPILE_OPTIONS "-Wpedantic;-Wall;-Wextra;-fsanitize=thread"
-    LINK_FLAGS "-fsanitize=thread"
-)
+add_executable(bulk_server src/main.cpp src/server.h src/async.h src/async.cpp)
 
 set_target_properties(bulk_server PROPERTIES
     CXX_STANDARD 17
@@ -29,10 +20,7 @@ set_target_properties(bulk_server PROPERTIES
     LINK_FLAGS "-fsanitize=address"
 )
 
-target_link_libraries(async ${CMAKE_THREAD_LIBS_INIT})
-
 target_link_libraries(bulk_server
-        async
         ${Boost_LIBRARIES}
         ${CMAKE_THREAD_LIBS_INIT}
         )
