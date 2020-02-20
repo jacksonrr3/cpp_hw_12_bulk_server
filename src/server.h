@@ -28,10 +28,10 @@ public:
 
 class Session
    // : public participant,
-    : public std::enable_shared_from_this<session>
+    : public std::enable_shared_from_this<Session>
 {
 public:
-    Session( std::shared_ptr<ba::ip::tcp::socket> socket, std::set<std::shared_ptr<session>>& cl, std::size_t bs)
+    Session( std::shared_ptr<ba::ip::tcp::socket> socket, std::set<std::shared_ptr<Session>>& cl, std::size_t bs)
         : socket_(socket),
         cl_(cl), bl_size_(bs), id_(nullptr)
     {
