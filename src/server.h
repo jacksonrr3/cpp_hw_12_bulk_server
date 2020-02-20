@@ -26,13 +26,13 @@ public:
 
 //typedef std::shared_ptr<session> participant_ptr;
 
-class session
+class Session
    // : public participant,
     : public std::enable_shared_from_this<session>
 {
 public:
-    session(ba::ip::tcp::socket socket, std::set<std::shared_ptr<session>>& cl, std::size_t bs)
-        : socket_(std::move(socket)),
+    Session( std::shared_ptr<ba::ip::tcp::socket> socket, std::set<std::shared_ptr<session>>& cl, std::size_t bs)
+        : socket_(socket),
         cl_(cl), bl_size_(bs), id_(nullptr)
     {
     }
@@ -51,7 +51,7 @@ private:
     {
         auto self(shared_from_this());
         std::cout << "read session, id = " << (reinterpret_cast<std::size_t>(id_)) << "\n";
-        ba::async_read(socket_,
+        ba::async_read(*socket_,
             boost::asio::buffer(buff_->data(), buff_size),
             [this, self](boost::system::error_code ec, std::size_t length)
             {
@@ -71,19 +71,19 @@ private:
             });
     }
 
-    ba::ip::tcp::socket socket_;
-    std::set<std::shared_ptr<session>>& cl_;
+    std::shared_ptr<ba::ip::tcp::socket> socket_;
+    std::set<std::shared_ptr<Session>>& cl_;
     std::size_t bl_size_;
     async::handle_t id_;
     std::shared_ptr<std::array<char, buff_size>> buff_;
 };
 
 
-class server
+class Server
 {
 public:
-    server(ba::io_service& io_service, const ba::ip::tcp::endpoint& endpoint, std::size_t size)
-     //   : service_(io_service),
+    Server(ba::io_service& io_service, const ba::ip::tcp::endpoint& endpoint, std::size_t size)
+        : service_(io_service),
     //    endpoint_(ba::ip::tcp::v4(), port),
         : acceptor_(io_service, endpoint),
         socket_(io_service), 
@@ -97,25 +97,25 @@ private:
     void do_accept()
     {
         std::cout << "do_accept\n";
-       acceptor_.async_accept(socket_,
-            [this](boost::system::error_code ec)
+       acceptor_.async_accept(*socket_,
+            [this, socket_](boost::system::error_code ec)
             {
                 if (!ec)
                 {
                     std::cout << "make shared session\n";
-                    std::make_shared<session>(std::move(socket_), clients_, bulk_size_)->start_session();
+                    std::make_shared<Session>(socket_, clients_, bulk_size_)->start_session();
                 }
-
+                socket_ = std::make_shared<ba::ip::tcp::socket>(service);    
                 do_accept();
             });
     }
 
- //   ba::io_service& service_;
+    ba::io_service& service_;
  //   ba::ip::tcp::endpoint endpoint_;
     ba::ip::tcp::acceptor acceptor_;
     //ba::ip::tcp::endpoint endpoint_(ba::ip::tcp::v4(), std::atoi(argv[1]));
-    ba::ip::tcp::socket socket_;
-    std::set<std::shared_ptr<session>> clients_;
+    std::shared_ptr<ba::ip::tcp::socket> socket_;
+    std::set<std::shared_ptr<Session>> clients_;
     std::size_t bulk_size_;
 };
 
