@@ -55,6 +55,7 @@ private:
             boost::asio::buffer(buff_->data(), buff_size),
             [this, self](boost::system::error_code ec, std::size_t length)
             {
+               std::cout << "async_read, lenght = " << lenght << "\n";
                 if (!ec)
                 {
                  std::cout << "receive, id = " << (reinterpret_cast<std::size_t>(id_)) << "\n";
