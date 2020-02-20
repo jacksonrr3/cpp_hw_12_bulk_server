@@ -98,14 +98,14 @@ private:
     {
         std::cout << "do_accept\n";
        acceptor_.async_accept(*socket_,
-            [this, socket_](boost::system::error_code ec)
+            [this](boost::system::error_code ec)
             {
                 if (!ec)
                 {
                     std::cout << "make shared session\n";
                     std::make_shared<Session>(socket_, clients_, bulk_size_)->start_session();
                 }
-                socket_ = std::make_shared<ba::ip::tcp::socket>(service);    
+                socket_ = std::make_shared<ba::ip::tcp::socket>(service_);    
                 do_accept();
             });
     }
