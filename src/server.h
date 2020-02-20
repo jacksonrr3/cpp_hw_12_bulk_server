@@ -86,10 +86,11 @@ public:
         : service_(io_service),
     //    endpoint_(ba::ip::tcp::v4(), port),
         acceptor_(io_service, endpoint),
-        socket_(io_service), 
+    //    socket_(io_service), 
         bulk_size_(size)
     {
             std::cout << "конструктор сервера\n";
+        socket_ = std::make_shared<ba::ip::tcp::socket>(service_);    
         do_accept();
     }
 
