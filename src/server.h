@@ -85,7 +85,7 @@ public:
     Server(ba::io_service& io_service, const ba::ip::tcp::endpoint& endpoint, std::size_t size)
         : service_(io_service),
     //    endpoint_(ba::ip::tcp::v4(), port),
-        : acceptor_(io_service, endpoint),
+        acceptor_(io_service, endpoint),
         socket_(io_service), 
         bulk_size_(size)
     {
