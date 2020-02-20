@@ -51,9 +51,8 @@ private:
     {
         auto self(shared_from_this());
         std::cout << "read session, id = " << (reinterpret_cast<std::size_t>(id_)) << "\n";
-        ba::async_read(*socket_,
-            boost::asio::buffer(buff_->data(), buff_size),
-            [this, self](boost::system::error_code ec, std::size_t length)
+        socket->async_read_some(boost::asio::buffer(buff->data(), buff_size),
+        [this, self](boost::system::error_code ec, std::size_t length)
             {
                std::cout << "async_read, lenght = " << length << "\n";
                 if (!ec)
