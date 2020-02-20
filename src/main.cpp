@@ -1,7 +1,6 @@
 #include <iostream>
 #include "server.h"
 
-
 int main(int argc, char* argv[])
 {
     try
@@ -17,9 +16,6 @@ int main(int argc, char* argv[])
 
         Server bulk_server(io_service, endpoint, std::atoi(argv[2]));
         io_service.run();
-        
-   
-      //  server(std::atoi(argv[1]), std::atoi(argv[2]));
     
     }
     catch (std::exception & e)
