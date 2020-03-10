@@ -60,6 +60,12 @@ public:
 		_bracket_counter = 1;
 	}
 
+	void disconnect_last() {
+		if (_comm_counter) {
+			notify();
+		}
+	}
+	
 	void notify() {
 		obs_mutex.lock();
 		for (auto& u : *_obs) {
