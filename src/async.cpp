@@ -104,7 +104,7 @@ namespace async {
 		//if (!users[id]->is_main()) {users[id]->_command_handler->notify();} // по условию, если блок команд ограниченный {} не закончен, то команды теряются.
 		if (users.size() == 1) {					      // если наш пользователь был последним, 
 			main_handler_mutex.lock();					//то выводим команды оставшиеся в основном обработчике.
-			_main_handler->notify();
+			_main_handler->disconnect_last();
 			main_handler_mutex.unlock();
 			}
 		users.erase(id);
