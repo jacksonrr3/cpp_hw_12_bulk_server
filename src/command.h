@@ -79,7 +79,7 @@ public:
 		if (s[0] == '{') {
 			if (_comm_counter) {
 				notify();
-				//_comm_counter = 0;
+				_comm_counter = 0;
 					//_is_reg = false;
 				
 			}
@@ -104,7 +104,7 @@ public:
 				++_comm_counter;
 				if (_comm_counter == _block_size) {
 					notify();
-				//	_comm_counter = 0;
+					_comm_counter = 0;
 				}
 			}
 		}
