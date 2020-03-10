@@ -1,8 +1,3 @@
-/**
-\file
-\brief Çàãîëîâî÷íûé ôàéë ñ îïèñàíèåì êëàññîâ
-Äàííûé ôàéë ñîäåðæèò â ñåáå îïðåäåëåíèÿ êëàññîâ, èñïîëüçóåìûõ â ïðîãðàììå
-*/
 
 #pragma once
 #include <iostream>
@@ -73,10 +68,7 @@ void print_to_file(const commands& comm, const std::string& time) {
 	file.close();
 }
 
-/**
-* @brief áàçîâûé êëàññ, äëÿ ðåàëèçàöèè êëàññîâ âûâîäà êîìàíä
-*
-*/
+
 
 class Observer {
 public:
@@ -89,10 +81,6 @@ public:
 };
 
 
-/**
-* @brief êëàññ ðåàëèçóþùèé ôóíêöèþ âûâîäà êîìàíä â ôàéë
-*
-*/
 
 class FileObserver : public Observer {
 public:
@@ -142,10 +130,6 @@ public:
 };
 
 
-/**
-* @brief êëàññ ðåàëèçóþùèé ôóíêöèþ âûâîäà êîìàíä â êîíñîëü
-*
-*/
 
 class TerminalObserver : public Observer {
 public:
