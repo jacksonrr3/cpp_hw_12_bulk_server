@@ -98,9 +98,16 @@ namespace async {
 	}
 
 	void disconnect(handle_t handle) {
-		std::lock_guard<std::mutex> lg(users_mutex);
 		std::size_t id = reinterpret_cast<std::size_t>(handle);
+		users_mutex.lock();
+		//if (!users[id]->is_main()) {users[id]->_command_handler->notify();} // по условию, если блок команд ограниченный {} не закончен, то команды теряются.
+		if (users.size() == 1) {					      // если наш пользователь был последним, 
+			main_handler_mutex.lock();					//то выводим команды оставшиеся в основном обработчике.
+			_main_handler->notify();
+			main_handler_mutex.unlock();
+			}
 		users.erase(id);
+		users_mutex.unlock();
 	}
 
 }
