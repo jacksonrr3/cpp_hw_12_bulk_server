@@ -76,7 +76,7 @@ public:
 	bool add_command(const std::string& s, bool u) {
 		_m_main->_str_ch += 1;
 		if (s[0] == '{') {
-			if (_comm.size()) {
+			if (_comm.size() && _is_reg) {
 				notify();
 			}
 			u = false;
