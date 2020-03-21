@@ -19,7 +19,7 @@ class Command {
 	obs_vec_ptr _obs;
 	commands _comm;
 	std::size_t _block_size;
-	std::size_t _bracket_counter = 0;
+	std::size_t _bracket_counter = 1;
 	bool _is_reg = true;
 	std::string _time;
 	std::shared_ptr<Metric> _m_main;
